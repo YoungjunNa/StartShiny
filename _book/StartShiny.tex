@@ -1,0 +1,244 @@
+\documentclass[]{book}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={처음 시작하는 R Shiny},
+            pdfauthor={Youngjun Na},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{natbib}
+\bibliographystyle{apalike}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{처음 시작하는 R Shiny}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Youngjun Na}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{2019-07-08}
+
+\usepackage{booktabs}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\chapter{서문}\label{intro}
+
+이 책은 \textbf{1) R을 어느정도 사용할 수 있고 2) Shiny를 배우고 싶은
+마음이 막 들기 시작한} 독자를 위해 쓰였습니다. 아래에 제시된 4가지를 다
+알고 있다면 당신은 이 책을 시작할 충분한 준비가 된 것입니다.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{-1}
+\tightlist
+\item
+  Shiny를 시작해 보고 싶은 마음이 있다.
+\item
+  R과 RStudio를 설치할 수 있다.
+\item
+  \texttt{install.package()} 와 \texttt{library()}함수를 사용할 수 있다.
+\item
+  \texttt{ggplot2}로 그래프를 그릴 수 있다.
+\item
+  pipe 연산자(\texttt{\%\textgreater{}\%})를 사용할 수 있다.
+\end{enumerate}
+
+\textbf{만약 준비가 되지 않았다면} 제가 추천하는 두권의 책을 먼저 읽고
+오면 좋을 것 같습니다. 읽는 순서는 중요하지 않지만 만약 한권만 읽을 수
+있다면 첫번째 책을 추천하고 싶습니다. 번역된 책도 있지만 원서의 경우
+무료로 공개가 되어 있습니다.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \href{https://r4ds.had.co.nz/}{R을 이용한 데이터과학}
+\item
+  \href{https://rstudio-education.github.io/hopr/}{손에 잡히는 R
+  프로그래밍}
+\end{enumerate}
+
+샤이니(\texttt{shiny})는 RStudio에서 개발한 R 패키지입니다. 샤이니를
+이용하면 R 언어만을 사용해서 입력값이 바뀜에 따라 함께 바뀌는 결과값
+또는 그래프 등을 보여주는 애플리케이션을 (비교적 손쉽게) 만들 수
+있습니다. \href{https://shiny.rstudio.com/gallery/}{Shiny 공식
+홈페이지}에는 이를 이용해 만든 다양한 애플리케이션을 보여주고 있습니다.
+이 책에서 길게 설명하는 것보다 직접 예제들을 살펴보면 어렵지 않게
+샤이니가 할 수 있는 일들에 대해 감을 잡을 수 있을 것입니다.
+
+최대한 간결하고 쉽게 쓰려고 노력했습니다. 내용이 많아지면 오히려 큰
+흐름에 혼란을 줄 수 있을 수도 있을 것 같아 (상당히) 많은 부분을
+덜어냈습니다. 부디 이 책에 다루지 않은 내용들 때문에 샤이니의 가능성을
+저평가 하지 않길 바랍니다.
+
+샤이니에 대한 지식이 10까지 있다면 본 책은 0에서 1까지 가는 것을 목표로
+하고 있습니다. 만약 앞으로의 시간들을 통해 당신이 샤이니에 대한 재미를
+조금이라도 느낄 수 있다면 성공입니다. \textbf{저는 그 재미와 호기심이
+당신을 더 높은 곳까지 이끌어 줄 것이라 믿습니다.} 자 그럼 시작해 볼까요?
+아마도 다음 함수가 필요할 것 같습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.package}\NormalTok{(}\StringTok{"shiny"}\NormalTok{)}
+\KeywordTok{install.package}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\chapter{웹의 구조}\label{web}
+
+Here is a review of existing methods.
+
+\chapter{반응성 프로그래밍}\label{reactive}
+
+We describe our methods in this chapter.
+
+\chapter{Shiny의 구조: ui \& server}\label{structure}
+
+Some \emph{significant} applications are demonstrated in this chapter.
+
+\section{Example one}\label{example-one}
+
+\section{Example two}\label{example-two}
+
+\chapter{\texorpdfstring{ui 1:
+\texttt{*input()}}{ui 1: *input()}}\label{ui1}
+
+We have finished a nice book.
+
+\chapter{\texorpdfstring{ui 2:
+\texttt{*Output()}}{ui 2: *Output()}}\label{ui2}
+
+We have finished a nice book.
+
+\chapter{\texorpdfstring{server:
+\texttt{render*()}}{server: render*()}}\label{server}
+
+We have finished a nice book.
+
+\chapter{\texorpdfstring{대시보드:
+\texttt{shinydashboard}패키지}{대시보드: shinydashboard패키지}}\label{dashboard}
+
+We have finished a nice book.
+
+\chapter{앱 배포: shinyapps.io}\label{deploy}
+
+We have finished a nice book.
+
+\bibliography{book.bib,packages.bib}
+
+
+\end{document}

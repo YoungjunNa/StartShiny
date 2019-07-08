@@ -1,0 +1,3 @@
+# server: `render*()` {#server}
+
+We have finished a nice book.

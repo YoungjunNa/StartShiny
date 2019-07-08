@@ -1,0 +1,11 @@
+--- 
+title: "처음 시작하는 R Shiny"
+author: "Youngjun Na"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "처음 시작하는 R Shiny"
+---
