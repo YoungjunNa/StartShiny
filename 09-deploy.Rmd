@@ -1,3 +1,0 @@
-# 앱 배포: shinyapps.io {#deploy}
-
-We have finished a nice book.

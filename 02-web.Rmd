@@ -1,3 +1,0 @@
-# 웹의 구조 {#web}
-
-Here is a review of existing methods.

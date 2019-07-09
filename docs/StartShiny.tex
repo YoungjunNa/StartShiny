@@ -139,30 +139,30 @@
 \addcontentsline{toc}{chapter}{Welcome}
 
 샤이니(\texttt{shiny})는 RStudio에서 개발한 R 패키지입니다. 샤이니를
-이용하면 R 언어만을 사용해서 입력값이 바뀜에 따라 함께 바뀌는 결과값
-또는 그래프 등을 보여주는 애플리케이션을 (비교적 손쉽게) 만들 수
+이용하면 \textbf{R 언어만을} 사용해서 입력값이 바뀜에 따라 함께 바뀌는
+결과값 또는 그래프 등을 보여주는 애플리케이션을 (비교적 손쉽게) 만들 수
 있습니다. \href{https://shiny.rstudio.com/gallery/}{Shiny 공식
 홈페이지}에서는 이를 이용해 만든 다양한 애플리케이션을 보여주고
 있습니다. 이 책에서 길게 설명하는 것보다 직접 예제들을 살펴보면 어렵지
-않게 샤이니가 할 수 있는 일들에 대해 감을 잡을 수 있을 것입니다.
+않게 샤이니가 할 수 있는 일들에 대한 감을 잡을 수 있을 것입니다.
 
 데이터 과학의 작업 흐름의 제일 마지막 단계는 분석한 내용을 다른사람과
-소통하는(Communicate) 것 입니다. 그리고 샤이니는 데이터 과학자가 CSS나
+소통하는 (Communicate) 것 입니다. 그리고 샤이니는 데이터 과학자가 CSS나
 JavaScript 같은 웹 언어를 모르더라도 사용자가 입력한 값에 즉시 반응하는
 애플리케이션을 만들 수 있게 해줍니다. 그럼으로써 들어오는 데이터가
 수시로 (어쩌면 실시간으로) 바뀌는 환경에서도 항상 자동화되고 일관된
 레포트를 이용해 소통할 수 있게 해줍니다.
 
-이 책은 \textbf{1) R을 어느정도 사용할 수 있고 2) Shiny를 배우고 싶은
-마음이 막 들기 시작한} 독자를 위해 쓰였습니다. 아래에 제시된 4가지를 다
-알고 있다면 당신은 이 책을 시작할 충분한 준비가 된 것입니다.
+이 책은 \textbf{1) R을 어느정도 사용}할 수 있고 \textbf{2) Shiny를
+배우고 싶은 마음이 막 들기 시작한} 독자를 위해 쓰였습니다. 아래에 제시된
+4가지를 다 알고 있다면 당신은 이 책을 시작할 충분한 준비가 된 것입니다.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \setcounter{enumi}{-1}
 \tightlist
 \item
-  Shiny를 시작해 보고 싶은 마음이 있다.
+  ⭐ Shiny ⭐를 시작해 보고 싶은 마음이 있다.
 \item
   R과 RStudio를 설치할 수 있다.
 \item
@@ -206,13 +206,86 @@ JavaScript 같은 웹 언어를 모르더라도 사용자가 입력한 값에 �
 \end{Highlighting}
 \end{Shaded}
 
-\chapter{웹의 구조}\label{web}
+\chapter{서버와 유저인터페이스}\label{web}
 
-Here is a review of existing methods.
+인류가 생산하는 거의 모든 정보는 웹(World Wide Web; W3)에 담겨 있습니다.
+우리는 아마도 거의 매일 크롬, 사파리, 파이어폭스 등 웹브라우저라고
+불리는 프로그램을 통해, 웹에 담겨있는 문서나 이미지 등의 정보를 읽어들여
+컴퓨터나 스마트폰의 화면을 통해 보고 있습니다. 각 웹페이지에 있는 링크를
+따라 다른 문서로 이동하거나 그 페이지로 정보를 보내기도 합니다. 우리는
+이것을 웹서핑이라고 부르죠.
+
+\section{서버와 클라이언트}\label{-}
+
+우리는 인터넷을 통해 어딘가에 저장되어 있는 웹페이지를 읽습니다. 이렇게
+웹이 저장되어 있는 (어딘가에 있는 그) 컴퓨터를 서버(Server)라고 합니다.
+클라이언트(Client)는 이러한 정보나 서비스를 소비하는 사람을 의미합니다.
+인터넷은 수많은 서버들이 거미줄처럼 얽혀서 형성되어 있습니다.
+
+\section{샤이니 서버와 유저인터페이스}\label{--}
+
+\textbf{샤이니는 R을 서버로 이용하여 결과물을 웹페이지에 보여주는
+애플리케이션}이라고 생각하시면 좋을 것 같습니다. 조금 나누어 설명하자면:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  R이 실행되고 있는 서버 컴퓨터가 있고
+\item
+  다른 곳에 있는 클라이언트가 웹브라우저를 통해 서버에 정보(input 값)를
+  전달해주면 그것을
+\item
+  서버에 있는 R이 그래프와 같은 결과값을 계산해
+\item
+  다시 클라이언트에게 보여주는 것 입니다.
+\end{enumerate}
+
+\textbf{서버가 사용자에게 보여주는 화면을 UI (User Interface)} 라고
+부릅니다. UI는 사용자에게 정보를 제공해주기도 하고 사용자가 서버로
+정보를 보낼 수 있는 화면을 제공하기도 합니다. 우리가 자주 접속하는
+Google이나 네이버와 같은 웹페이지에서 보이는 화면을 생각하면 쉽게 상상해
+볼 수 있을 것입니다. \textbf{샤이니는 UI와 Server로 이루어져 있습니다.}
+그리고 이 둘은 언제나 함께 동작합니다. 서버에서 UI로 화면을 표시해
+주기도 하고, UI에서 서버로 값을 전달해 주기도 합니다. 샤이니의 가장
+기본적인 뼈대는 다음과 같습니다.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(shiny)}
+
+\NormalTok{ui <-}\StringTok{ }\KeywordTok{fluidPage}\NormalTok{(}
+  
+\NormalTok{)}
+
+\NormalTok{server <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(input, output, session) \{}
+  
+\NormalTok{\}}
+
+\KeywordTok{shinyApp}\NormalTok{(ui, server)}
+\end{Highlighting}
+\end{Shaded}
+
+위 R 코드에는 \texttt{ui}와 \texttt{server}라는 두개의 객체가
+존재합니다. 그리고 \texttt{shinyApp()} 이라는 함수는 이 객체들을
+웹애플리케이션의 형태로 사용자들에게 보여줍니다.
+
+\section{더 알아보기}\label{-}
+
+혹시 웹에 대해 더 알고 싶은 경우
+\href{https://opentutorials.org/course/1}{생활코딩}의 WEB1 이라는 무료
+온라인 수업을 추천합니다. 이 수업을 마치는데 생각보다 많은 시간이 걸리지
+않습니다. 두세시간 정도 \href{https://github.com/egoing}{egoing}
+선생님의 친절한 강의를 듣고 나면 금새 웹과 친해질 수 있을 것입니다.
+무엇보다 결과적으로 샤이니를 더 깊게 이해할 수 있게 될것입니다.
 
 \chapter{반응성 프로그래밍}\label{reactive}
 
-We describe our methods in this chapter.
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# shiny::runExample("01_hello")}
+\end{Highlighting}
+\end{Shaded}
 
 \chapter{Shiny의 구조: ui \& server}\label{structure}
 
