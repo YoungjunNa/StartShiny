@@ -169,10 +169,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   
   output<span class="op">$</span>table1 &lt;-<span class="st"> </span><span class="kw">renderTable</span>(iris)
 }</code></pre></div>
+<p>이제 <code>server</code>에 대한 생각은 잠시 잊으셔도 좋습니다. 이번 챕터에서는 <code>ui</code>에서 일어나고 있는 일들에 대해 알아보도록 하겠습니다.</p>
 </div>
 <div id="input" class="section level2">
 <h2><span class="header-section-number">3.2</span> <code>*Input()</code></h2>
-<p>We have finished a nice book.</p>
+<p>샤이니가 동작하기 위해서는 애플리케이션을 사용하는 유저로부터 데이터값(input 값)을 받을 수 있어야 합니다. 샤이니에는 이러한 입력값을 받을 수 있는 여러가지 입력 위젯을 만드는 함수들이 있습니다. 이러한 입력 위젯 함수를 이용해 UI에 출력하는 내용은 다음과 같습니다.</p>
+<div class="figure" style="text-align: center"><span id="fig:widget"></span>
+<img src="https://shiny.rstudio.com/tutorial/written-tutorial/lesson3/images/basic-widgets.png" alt="샤이니 입력 위젯의 종류." width="100%" />
+<p class="caption">
+Figure 3.1: 샤이니 입력 위젯의 종류.
+</p>
+</div>
+<p><strong>입력 위젯은:</strong></p>
+<ol style="list-style-type: decimal">
+<li>전부 다는 아니지만 대부분 <code>numericInput()</code>, <code>textInput()</code>, <code>sliderInput()</code>, <code>fileInput()</code>과 같이 <code>*Input</code>으로 끝나는 이름을 갖습니다.</li>
+<li>함수의 첫번째 인자는 <code>inputId =</code>입니다.</li>
+<li>두번째 인자는 <code>label =</code>로 위젯이 UI에 보여질 때 함께 보이는 제목입니다.</li>
+<li><code>value =</code> 인자를 통해 초기값을 설정할 수 있다.</li>
+</ol>
 </div>
 <div id="output" class="section level2">
 <h2><span class="header-section-number">3.3</span> <code>*Output()</code></h2>
