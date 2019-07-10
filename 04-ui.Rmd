@@ -1,41 +1,65 @@
-# 유저인터페이스1: `ui <-` {#ui1}
+# 유저인터페이스 1: `ui <-` {#ui1}
 
 본 챕터에서는 `ui`의 구성요소 중 샤이니가 **사용자로부터 정보를 전달받는 방법**에 대해 알아보도록 하겠습니다.
 
-## `*Input()` 
-
-### 입력위젯의 종류
+## 입력위젯의 종류: `*Input()` 
 
 ```{r widget, fig.cap="샤이니 입력 위젯의 종류.", echo = FALSE, out.width = "100%", fig.align='center'}
 
 knitr::include_graphics("https://shiny.rstudio.com/tutorial/written-tutorial/lesson3/images/basic-widgets.png")
 ```
 
-샤이니가 동작하기 위해서는 애플리케이션을 사용하는 유저로부터 데이터값(input 값)을 받을 수 있어야 합니다. 샤이니에는 이러한 입력값을 받을 수 있는 여러가지 입력 위젯을 만드는 함수들이 있습니다. 이러한 입력위젯(Control widgets) 함수를 이용해 UI에 위와같은 내용을 출력합니다. 샤이니에서 기본적으로 제공하는 입력위젯과 이를 만드는 함수는 다음과 같습니다.
+샤이니가 동작하기 위해서는 애플리케이션을 사용하는 유저로부터 입력값(input)을 받을 수 있어야 합니다. 샤이니에는 이러한 입력값을 받을 수 있는 여러가지 입력 위젯을 만드는 함수들이 있습니다. 이러한 입력위젯(Control widgets) 함수를 이용해 UI에 위와같은 내용을 출력합니다. 샤이니에서 기본적으로 제공하는 입력위젯과 이를 만드는 함수는 다음과 같습니다.
 
-```{r control-widget, tab.cap="샤이니 입출력 위젯의 종류 및 함수.", echo=FALSE, tidy=FALSE, message=FALSE, fig.width=6, fig.height=4.5, fig.align='center'}
+```{r controlwidget, tab.cap="샤이니 입출력 위젯의 종류 및 함수.", echo=FALSE, tidy=FALSE, out.width = "70%", fig.align='center'}
+
 library(magrittr)
 
 tibble::tribble(
   ~"Widget", ~"Function",
-  "`actionButton`", "액션버튼",
-  "`checkboxGroupInput`", "체크박스 그룹",
-  "`checkboxInput`",	"체크박스 하나",
-  "`dateInput`",	"날짜 선택",
-  "`dataRangeInput`", "날짜 구간 선택",
-  "`fileInput`", "파일 업로드",
-  "`helpText`", "도움말"
-  
-  
+  "`actionButton()`", "액션버튼",
+  "`checkboxGroupInput()`", "체크박스 그룹",
+  "`checkboxInput()`",	"체크박스 하나",
+  "`dateInput()`",	"날짜 선택",
+  "`dataRangeInput()`", "날짜 구간 선택",
+  "`fileInput()`", "파일 업로드",
+  "`helpText()`", "도움말",
+  "`numericInput()`",	"숫자 입력",
+  "`radioButtons()`",	"라디오 버튼",
+  "`selectInput()`",	"선택 상자",
+  "`sliderInput()`",	"슬라이더 바",
+  "`submitButton()`",	"제출 버튼",
+  "`textInput()`",	"텍스트 입력"
 ) %>% knitr::kable()
 ```
 
+## 입력위젯 함수의 위치
+**입력위젯 함수는 `ui` 객체 내에 위치해야 합니다.** `ui <- fluidPage()` 안에 함수를 넣어보겠습니다. 입력위젯 함수의 첫번째 인자는 대부분 `inputId =`입니다. 입력위젯의 경우 `server` 코드가 비어있어도 작동합니다.
 
+```{r message=FALSE, boarder=TRUE}
+library(shiny)
 
-### 입력위젯의 특징
+ui <- fluidPage(
+  numericInput(inputId = "numeric", label = "Numeric Input!", value = 979722),
+  sliderInput(inputId = "slider", "Slider Input!", min = 0, max = 979722, value = 450000),
+  sliderInput(inputId = "sliderRandge", "Slider Range Input!", min = 0, max = 979722, value = c(200000, 800000)),
+  textInput(inputId = "text", label = "Text Input!", "I LOVE SHINY!"),
+  radioButtons(inputId = "radio", label = "Radio Button!", choices = c("one", "two", "tttttthree")),
+  actionButton(inputId = "action", label = "Action Button!")
+)
+
+server <- function(input, output, session) {
+  
+}
+
+shinyApp(ui, server)
+```
+
+위와같은 함수를 이용해 6가지의 입력 위젯을 UI에 표시해 보았습니다. 다른 위젯 함수도 어렵지 않게 응용해 볼 수 있을 것입니다. [샤이니 위젯 갤러리](http://shiny.rstudio.com/gallery/widget-gallery.html)에는 기본으로 제공하는 위젯의 예시가 잘 나와 있으니 한번 확인해 보시기 바랍니다.
+
+## 입력위젯의 특징
 
 1. (전부 다는 아니지만) 대부분 `numericInput()`, `textInput()`, `sliderInput()`, `fileInput()`과 같이 `*Input`으로 끝나는 이름을 갖습니다. 
 2. 함수의 첫번째 인자는 `inputId =`입니다.
 3. 두번째 인자는 `label =`로 위젯이 UI에 보여질 때 함께 보이는 제목입니다.
 4. `value =` 인자를 통해 초기값을 설정할 수 있다.
-
