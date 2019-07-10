@@ -156,7 +156,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="reactive-chain" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> 데이터의 흐름</h1>
-<p>샤이니를 알려면 먼저 데이터의 흐름을 알아야 합니다. 샤이니는 한쪽의 데이터가 바뀌면 연결된 다른 데이터들도 함께 바뀌는 데이터 흐름을 가지고 있습니다. 이를 반응성(Reactivity)이라고 합니다. 이러한 데이터의 흐름은 <code>ui</code>와 <code>server</code>를 넘나들며 하나의 체인처럼 연결되어 있고 이것을 반응성 체인(Reactive chain) 이라고 표현합니다. 예를 들어 살펴보겠습니다. 직접 코드를 실행해보지 않아도 됩니다. 자세히 들여다 봐주세요.</p>
+<p>샤이니를 알려면 먼저 데이터의 흐름을 알아야 합니다. 샤이니는 한쪽의 데이터가 바뀌면 연결된 다른 데이터들도 함께 바뀌는 데이터 흐름을 가지고 있습니다. 이를 반응성(Reactivity)이라고 합니다. 이러한 데이터의 흐름은 <code>ui</code>와 <code>server</code>를 넘나들며 하나의 체인처럼 연결되어 있고 이것을 반응성 체인(Reactive chain) 이라고 표현합니다. 예를 들어 살펴보겠습니다. 아직 직접 코드를 실행해보지 않아도 됩니다. 자세히 들여다 봐주세요.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
 
 ui &lt;-<span class="st"> </span><span class="kw">fluidPage</span>(
@@ -185,7 +185,7 @@ server &lt;-<span class="st"> </span><span class="cf">function</span>(input, out
 <li>지정된 <code>plot1</code>은 <code>ui</code> 내에 <code>plotOutput(&quot;plot1&quot;)</code> 함수로 전달되어 UI에 그래프를 출력합니다.</li>
 </ol>
 <div class="figure" style="text-align: center"><span id="fig:reactive-chain"></span>
-<img src="img/reactive-chain.png" alt="샤이니 데이터들은 반응성 체인으로 연결되어 있다." width="60%" />
+<img src="img/reactive-chain.png" alt="샤이니 데이터들은 반응성 체인으로 연결되어 있다." width="80%" />
 <p class="caption">
 Figure 2.1: 샤이니 데이터들은 반응성 체인으로 연결되어 있다.
 </p>

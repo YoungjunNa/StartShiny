@@ -24,7 +24,7 @@ tibble::tribble(
   "`dateInput`",	"날짜 선택",
   "`dataRangeInput`", "날짜 구간 선택",
   "`fileInput`", "파일 업로드",
-  "`helpText`", "도움말",
+  "`helpText`", "도움말"
   
   
 ) %>% knitr::kable()
