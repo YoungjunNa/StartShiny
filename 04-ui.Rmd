@@ -1,49 +1,41 @@
-# 유저인터페이스: `ui <-` {#ui1}
+# 유저인터페이스1: `ui <-` {#ui1}
 
-## `ui`와 `server`의 작성방식
-
-샤이니의 `ui`와 `server`는 코드를 작성 하는 방식에 차이가 있습니다. `ui`는 함수가 중첩되는 형태로 코딩이 됩니다. 이는 샤이니 애플리케이션의 UI가 결국 웹의 언어인 html의 형식으로 변환되어 출력되기 때문에 html의 문법을 닮은 모양을 갖는 것입니다.
-
-```{r eval=FALSE}
-ui <- fluidPage(
-  titlePanel("hello world!"),
-  sliderInput("slider_example"),
-  plotOutput("plot1"),
-  tableOutput("table1")
-)
-```
-
-`server` 함수는 `ui` 함수들과 달리 R의 코딩 패턴을 따릅니다. 한마디로 `ui`는 콤마(`,`)로 함수들이 이어져 있지만 `server`는 객체나 함수를 구분하는 데 콤마를 사용하지 않습니다.
-
-```{r eval=FALSE}
-server <- function(input, output, session) {
-  
-  output$plot1 <- renderPlot({
-    plot(iris$Sepal.Length, iris$Sepal.Width)
-  })
-  
-  output$table1 <- renderTable(iris)
-}
-```
-
-이제 `server`에 대한 생각은 잠시 잊으셔도 좋습니다. 이번 챕터에서는 `ui`에서 일어나고 있는 일들에 대해 알아보도록 하겠습니다.
+본 챕터에서는 `ui`의 구성요소 중 샤이니가 **사용자로부터 정보를 전달받는 방법**에 대해 알아보도록 하겠습니다.
 
 ## `*Input()` 
 
-샤이니가 동작하기 위해서는 애플리케이션을 사용하는 유저로부터 데이터값(input 값)을 받을 수 있어야 합니다. 샤이니에는 이러한 입력값을 받을 수 있는 여러가지 입력 위젯을 만드는 함수들이 있습니다. 이러한 입력 위젯 함수를 이용해 UI에 출력하는 내용은 다음과 같습니다.
+### 입력위젯의 종류
 
 ```{r widget, fig.cap="샤이니 입력 위젯의 종류.", echo = FALSE, out.width = "100%", fig.align='center'}
 
 knitr::include_graphics("https://shiny.rstudio.com/tutorial/written-tutorial/lesson3/images/basic-widgets.png")
 ```
 
-**입력 위젯은:** 
+샤이니가 동작하기 위해서는 애플리케이션을 사용하는 유저로부터 데이터값(input 값)을 받을 수 있어야 합니다. 샤이니에는 이러한 입력값을 받을 수 있는 여러가지 입력 위젯을 만드는 함수들이 있습니다. 이러한 입력위젯(Control widgets) 함수를 이용해 UI에 위와같은 내용을 출력합니다. 샤이니에서 기본적으로 제공하는 입력위젯과 이를 만드는 함수는 다음과 같습니다.
 
-1. 전부 다는 아니지만 대부분 `numericInput()`, `textInput()`, `sliderInput()`, `fileInput()`과 같이 `*Input`으로 끝나는 이름을 갖습니다. 
+```{r control-widget, tab.cap="샤이니 입출력 위젯의 종류 및 함수.", echo=FALSE, tidy=FALSE, message=FALSE, fig.width=6, fig.height=4.5, fig.align='center'}
+library(magrittr)
+
+tibble::tribble(
+  ~"Widget", ~"Function",
+  "`actionButton`", "액션버튼",
+  "`checkboxGroupInput`", "체크박스 그룹",
+  "`checkboxInput`",	"체크박스 하나",
+  "`dateInput`",	"날짜 선택",
+  "`dataRangeInput`", "날짜 구간 선택",
+  "`fileInput`", "파일 업로드",
+  "`helpText`", "도움말",
+  
+  
+) %>% knitr::kable()
+```
+
+
+
+### 입력위젯의 특징
+
+1. (전부 다는 아니지만) 대부분 `numericInput()`, `textInput()`, `sliderInput()`, `fileInput()`과 같이 `*Input`으로 끝나는 이름을 갖습니다. 
 2. 함수의 첫번째 인자는 `inputId =`입니다.
 3. 두번째 인자는 `label =`로 위젯이 UI에 보여질 때 함께 보이는 제목입니다.
 4. `value =` 인자를 통해 초기값을 설정할 수 있다.
 
-## `*Output()`
-
-We have finished a nice book.
