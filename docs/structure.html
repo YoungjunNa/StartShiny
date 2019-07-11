@@ -158,7 +158,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>샤이니의 <code>ui</code>와 <code>server</code>는 코드를 작성 하는 방식에 차이가 있습니다. <code>ui</code>는 함수가 중첩되는 형태로 코딩이 됩니다. 이는 샤이니 애플리케이션의 UI가 결국 웹의 언어인 html의 형식으로 변환되어 출력되기 때문에 html의 문법을 닮은 모양을 갖는 것입니다.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ui &lt;-<span class="st"> </span><span class="kw">fluidPage</span>(
   <span class="kw">titlePanel</span>(<span class="st">&quot;hello world!&quot;</span>),
-  <span class="kw">sliderInput</span>(<span class="st">&quot;slider_example&quot;</span>),
+  <span class="kw">textInput</span>(<span class="st">&quot;id&quot;</span>, <span class="st">&quot;textInput_example:&quot;</span>, <span class="st">&quot;hello!&quot;</span>),
   <span class="kw">plotOutput</span>(<span class="st">&quot;plot1&quot;</span>),
   <span class="kw">tableOutput</span>(<span class="st">&quot;table1&quot;</span>)
 )</code></pre></div>
@@ -172,6 +172,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   output<span class="op">$</span>table1 &lt;-<span class="st"> </span><span class="kw">renderTable</span>(iris)
 }</code></pre></div>
 <p>이제 <code>server</code>에 대한 생각은 잠시 잊으셔도 좋습니다. 다음 챕터에서는 <code>ui</code>에서 일어나고 있는 일들에 대해 알아보도록 하겠습니다.</p>
+<p><img src="img/html.jpeg"></p>
 
 </div>
             </section>
